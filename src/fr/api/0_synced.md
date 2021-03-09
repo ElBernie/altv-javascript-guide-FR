@@ -1,34 +1,34 @@
-# What is Synchronized
+# Qu'est-ce qui est synchronisé
 
-alt:V has a lot of things that are automatically synchronized.
+alt:V a plein de choses qui sont synchronisées.
 
-It takes a lot of the pain out of developing a server when things already work outright.
+Cela permet de retirer beaucoup de difficulté lors du développement d'un serveur quand les choses fonctionnent d'elle même.
 
-Here is an unofficial list of things that may be synchronized.
+Voici une liste non officielle des choses qui peuvent être synchronisées
 
--   Player/Ped Clothing
--   Player/Ped Appearance
--   Player/Ped Animations
--   Player/Ped Tasks
--   Player/Ped Driving Tasks
--   Players on Ladders
--   Players Shooting
--   Players Fist Fighting
--   Players Rolling
--   Players Crouching (Have to change stance.)
--   Players Crawling (Have to change stance.)
--   Vehicle Damage
--   Vehicle Mods
--   Vehicle Colors
--   Vehicle Movement
--   Vehicle Crashing
+-   Vêtements du joueur/PNJ
+-   Apparence du joueur/PNJ
+-   Animations du joueur/PNJ
+-   Tâches du joueur/PNJ
+-   Tâches de conduite du joueur/PNJ
+-   Les joueurs sur les échelles
+-   Les joueurs qui tirent
+-   Les joueurs qui se battent au poing
+-   Les joueurs qui effectuent une roulade
+-   Les joueurs accroupis
+-   Les joueurs qui rampent
+-   Dégats des véhicules
+-   Modifications des véhicules
+-   Couleurs des véhicules
+-   Mouvement des véhicules
+-   Accidents des véhicules
 -   Objects from Tasks
--   Swimming
--   Diving
--   Waves (Weather Dependent)
--   Wind Turbines
--   Street Lights
--   Moving Stunt Props
--   Anything that uses Network Time
+-   la nage
+-   La plongée
+-   Vagues (en fonction de la météo)
+-   Les éoliennes
+-   Les feux rouges
+-   Les cascades (stunt)
+-   Tout ce qui utilise le Temps Réseau (Network Time)
 
-This synchronization can be confirmed with upwards of 600+ players.
+La synchronisation est effective jusqu'à 600 joueurs et plus.
