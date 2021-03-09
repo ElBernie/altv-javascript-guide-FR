@@ -1,16 +1,16 @@
-# Setup Client Debugging
+# Activer le Debugging sur le client
 
-You should have the alt:V client setup at this stage.
+A cette étape votre client alt:V doit être installé.
 
-Go to the folder location of where your altv.exe is located and find the altv.cfg.
+Allez à l'emplacement ou vous avez installé altv.exe et trouvez le fichier altv.cfg
 
 ![](../../img/edit_cfg.png)
 
 ## altv.cfg
 
-Make sure that this parameter is set to true.
+Verifiez que le paramètre `debug` est configuré avec `true`.
 
-If it does not exist. Create the parameter.
+Si il n'existe, vous pouvez le créer avec l'option suivante.
 
 ```sh
 debug: 'true'
@@ -18,17 +18,17 @@ debug: 'true'
 
 ## Reconnecting
 
-After a server is restarted you will be disconnected. You are only able to reconnect to a server with `debug` set to `true` as well as your own client's `debug` set to `true`.
+Suite à un redémarrage de serveur, vous serez déconnecté. Vous pouvez vous reconnecter uniquement si le serveur a le paramètre `debug` configuré sur `true`, et également sur votre client.
 
-Simply Press `F8`
+Appuyez simplement sur `F8`
 
-**With Password**
+**Avec mot de passe**
 
 ```
-reconnect password_goes_here
+reconnect mot_de_passe
 ```
 
-**Without Password**
+**Sans mot de passse**
 
 ```
 reconnect
