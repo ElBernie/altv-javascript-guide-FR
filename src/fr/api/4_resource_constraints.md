@@ -1,20 +1,20 @@
-# Single Resource vs Multi
+# Ressource unique vs multiple ressources
 
-Dependent on what direction you want to take your project you may be asking yourself if you should go with a single resource or multiple resources that can be toggled on and off. 
+En fonction de l'orientation que vous souhaitez donner a votre prijet, vous devriez vous poser la question suivante: dois-je faire une seule ressource pour tout le serveur, ou séparer les ressources en petits blocs qui peuvent être activés ou désactivés.
 
-It's good to keep in mind that additional resources will receive their own thread.
+Il faut garder a l'esprit que chaque ressource va avoir son propre thread d'exécution !
 
-Let's first look at some of the limitations of a multi-resource setup.
+Commençons par observer les limites d'une organisation multi ressources.
 
-## Multi Resource Limitations
+## Limite de l'organisation multi ressources
 
-A limitation will be defined as what may cause a headache or a nuisance when building out your game mode.
+Une limite est définie comme pouvant provoquer des problèmes ou des difficultés lors de la création de votre serveur.
 
-### Prototypes Are Not Shared
+### Les prototypes ne sont pas partagés
 
-If you enjoy extending the functionality of individual classes to add new functionality then a Multi Resource system is not going to help you very much. Let's talk about why that is.
+Si vous appréciez étendre les fonctionnalité des classes de base pour ajouter de nouvelles fonctionnalité, alors le système multi ressource n'est pas fait pour vous. Voyons pourquoi.
 
-Assume you have this prototype.
+Imaginons que vous avez ce prototype.
 
 ```js
 alt.Player.local.addMoney = function addMoney(amount) {
@@ -22,27 +22,28 @@ alt.Player.local.addMoney = function addMoney(amount) {
         return false;
     }
 
-	if (!this.money) {
+    if (!this.money) {
         this.money = amount;
     } else {
         this.money += amount;
     }
-    
+
     return true;
-}
+};
 ```
 
-You will now only have access to the `addMoney` function in the resource that it is written in. 
+Vous pourrez uniquement accèder a la fonction `addMoney` depuis la ressource ou elle est écrite.
 
-There is no way for you to port this function to another resource and that is because variables are also no shared between resources.
+Il est absolument impossible d'utiliser cette fonction a une autre ressource, tout simplement parce que les variables ne sont pas partagées entre ces deux ressources.
 
-### Custom Properties Are Not Shared
+### Les propriétés customs ne sont pas partagées
 
+Vous vous demandez pourquoi les fonctions `setMeta` and `getMeta` existent? Voilà pourquoi.
 Ever wonder why `setMeta` and `getMeta` exist? This is why.
 
-With the function above we can add money to the player but what if we want to get it in another resource?
+Avec la fonction défini plus haut nous pouvons ajouter de l'argent au joueur, mais comment faire si on veut y accéder depuis d'autres ressources ?
 
-Let's take a look at what your code might look like now.
+Un petit exemple avec le code suivant.
 
 ```js
 // Exporting this function because we can import it into other resources.
@@ -50,13 +51,13 @@ export function addMoney(amount) {
     if (isNaN(amount)) {
         return false;
     }
-	
+
     if (!this.hasMeta('money')) {
         this.setMeta('money', amount);
     } else {
         let currentAmount = this.getMeta('money');
         currentAmount += amount;
-    	this.setMeta('money', currentAmount);
+        this.setMeta('money', currentAmount);
     }
 }
 
@@ -65,38 +66,38 @@ export function getMoney(amount) {
     if (!this.hasMeta('money')) {
         return 0;
     }
-    
+
     return this.getMeta('money');
 }
 ```
 
-As you can see we've created two new functions that can be imported into any other resource as long as this resource is set as a dependency for the resource where we want to add and get money.
+Comme vous pouvez le voir, on vient de créer deux nouvelles fonctions. Elles peuvent importées dans n'importe quelle autre ressource tant que la ressource ci-dessus est enregistré comme dépendance de la ressource dans laquelle nous utiliser nos fonctions.
 
-This is all fine and dandy but the only benefit of this would be the threads that are integrated at a lower level in C++.
+Ca fonctionne parfaitement, mais le seul bénéfice de cette utilisation serait d'utiliser des threads définis en C++.
 
-Why bother with splitting all of this up and adding more headache to your project when you can do it all in a single resource (Not a single file. That's actually a horrible idea. This is not SAMP)
+Alors pourquoi s'embêter a découper nos ressources ainsi alors que nous pourrions le faire sans problème avec une seule ressource ? (Evidemment pas dans un seul fichier. Très mauvaise idée. Alt:V c'est pas SAMP.)
 
-## Single Resource Limitations
+## Limite des ressources uniques
 
-Obviously the biggest thing you're going to miss when going with a single resource is the threads. However, most people making resources are likely not going to need them. This includes those of you who are writing roleplay game modes and want to pursue 'best practices'.
+Le seul défaut des ressources uniquement c'est qu'il n'est pas possible de profiter des threads du serveur. Mais la plupart des développeurs de serveur n'ont pas besoin d'eux. Celà inclue également les gens qui veulent développer des gamemodes RP et souhaitent suivre les meilleures pratiques de développement.
 
-### Loss of State
+### Perte d'état
 
-When you restart a single resource. You lose the state of the resource that is storing state inside of it.
+Lorsque vous redémarrez une ressource unique, vous perdez l'intégralité de l'état de votre ressource.
 
-Meaning that you will need to reconnect to re-stablish your state.
+Vous êtes donc obligés de vous reconnecter pour réinitialiser l'état de votre ressource.
 
-An example would be `player.money` being 500 prior to restarting a resource.
+Un exemple: `player.money` est défini à 500 avant le redémarrage de la ressource.
 
-Then `player.money` being 0 after restarting the resource because you did not setup your player state again.
+Quand vous redémarrez la ressource, l'état de `player.money` est remis à 0.
 
-### File Structure Maintenance
+### Maintenance de l'architecture de fichiers
 
-If you are building a very large game mode you are going to have a very large resource. Which means that if you do not have a very good folder structure you may find yourself struggling to keep all of your code organized. This is one of the major reasons why people will opt-in for a multi-resource system.
+Si vous construisez un gros projet, vous allez probablement avoir une ressource énorme. Ce qui veut dire que si vous n'avez pas une bonne architecture de dossier, vous allez avoir beaucoup de problèmes pour organiser votre code. C'est la raison principale pour laquelle les développeurs vont choisir un système multi-ressources.
 
-I've found that one of my favorite folder structures is as follows.
+Mon architecture favorite est la suivante.
 
-#### Client Folder Structure
+#### Structure du code client
 
 ```sh
 ├───anticheat 				# A folder for anticheat related systems.
@@ -120,11 +121,11 @@ I've found that one of my favorite folder structures is as follows.
     └───chat.js				# Handles working with chat on client-side.
 ```
 
-Keep in mind that individual folders can expand into more folders.
+Gardez a l'esprit que chaque dossiers peut être divisé en plusieurs sous dossiers.
 
-However, the trick with this folder structure is to keep a similar file name on the server-side so you know which files corresponds with which system.
+L'astuce pour cette architecture de projet est de conserver les memes noms de fichier sur le serveur afin de savoir quel fichier correspond a quel système.
 
-#### Server Folder Structure
+#### Structure du code serveur
 
 ```sh
 ├───commands				# Different command handlers.
@@ -146,9 +147,8 @@ However, the trick with this folder structure is to keep a similar file name on 
     └───chat.js 			# A server side chat handler for routing messages.
 ```
 
-## An Opinion
+## Un avis sur la question
 
-I believe that the added functionality of Prototypes greatly outweighs all of the downsides a single resource may have. With a good folder system and a good understanding of your code base it's very easy to work with a single resource as long as you split up your files into individual systems with corresponding names on both client and server side.
+Je crois que les fonctionnalités ajoutées par les prototypes dépassent largement les inconvénients du systeme de ressource unique. Avec une bonne structure de projet et une bonne compréhension de votre code, c'est très simple de travailler avec une ressource uniquement. Tant que vous divisez vos fichiers en systèmes individuels qui ont les mêmes noms côté client et côté serveur.
 
-Most developers working with JavaScript on alt:V often opt out of using multi-resource solely because of this reason.
-
+La plupart des développeurs qui travaillent avec le framework alt:V choissisent de ne pas utiliser les système multi ressources pour cette raison.
