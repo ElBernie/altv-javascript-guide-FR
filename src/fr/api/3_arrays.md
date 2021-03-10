@@ -1,20 +1,20 @@
-# Get All Players & Vehicles
+# Obtenir tous les joueurs et tous les véhicules
 
-There are two special arrays that exist on server-side that help you with determine all players or vehicles.
+Il existe deux arrays spéciales, utilisables côté serveur qui permettent d'obtenir la liste de tous les joueurs et véhicules présents sur le serveur.
 
 ## alt.Player.all
 
-This array specifically returns a list of all players that are currently on your server.
+Cette array retourne une liste de tous les joueurs présents sur le serveur.
 
-There are a few things you should keep in mind when using arrays like this.
+Il y a quelques petites choses que vous devez retenir en utilisant cette array.
 
-1. Always clone your array. It will save you from undefined or invalid issues.
+1. Pensez toujours à cloner votre array, pour éviter des bugs.
 
 ```js
 const currentPlayers = [...alt.Player.all];
 ```
 
-2. When looping through your players. Validate them.
+2. Lorsque vous effectuez une boucle sur les joueurs, pensez à verifier que les joueurs sont bien valides.
 
 ```js
 const currentPlayers = [...alt.Player.all];
@@ -44,7 +44,7 @@ currentPlayers.forEach((player, index) => {
 
 ## alt.Vehicle.all
 
-Make sure you've read above. The same process and validity checks apply for vehicles.
+Les mêmes recommendations pour le paragraphe précédent s'appliquent pour les véhicules.
 
 ```js
 const currentVehicles = [...alt.Vehicle.all];
