@@ -1,82 +1,70 @@
-# Events
+# Les évènements
 
-Events work in a very specific way and understanding their communication is very important.
+Les évènements s'utilisent d'une manière spécifiques, et il est très important de comprendre leur fonctionement.
 
-Server can talk to any client.
-Client may only talk to WebViews and the Server.
+Le serveur peut communiquer avec n'importe quel client.
 
-A client **CANNOT** talk to another client.
+Le client peut seulement communiquer avec le serveur ou les WebViews.
 
-| Function Name  | Description                                                                                |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| alt.emit       | Emit an event on server or client side. Only received on the side it was emitted from.     |
-| alt.on         | Receives an event. Server only receives server events. Client only receives client events. |
-| alt.onServer   | Receives an event emitted from the server on client-side. Triggered with `alt.emitClient`. |
-| alt.emitClient | Emit an event to a specific client that they receive with `alt.onServer`.                  |
-| alt.onClient   | Receives an event emitted from the client on server-side. Triggered with `alt.emitServer`. |
-| alt.emitServer | Emit an event to the server that is received with `alt.onClient`.                          |
+Un client **NE PEUT PAS** communiquer avec un autre client.
 
-## Server to Client
+| Function Name  | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| alt.emit       | Emet un évènement sur le serveur ou sur le client. L'évènement est reçu uniquement du côté d'ou il est émit. |
+| alt.on         | Reçoit un évènement. Le serveur reçoit les évènements émis depuis le serveur, et inversement pour le client. |
+| alt.onServer   | Reçoit un évènement émit depuis le serveur vers le client. Déclenché avec `alt.emitClient`.                  |
+| alt.emitClient | Emet un évenement vers un client spécifique. Le client reçoit l'évènement avec `alt.onServer`.               |
+| alt.onClient   | Recoit un évènement émis par un client sur le serveur. Déclenché avec `alt.emitServer`.                      |
+| alt.emitServer | Emet un évènement depuis le client vers le serveur. Le serveur reçoit l'évènement avec `alt.onClient`.       |
 
-The server may only emit data to the client-side with emitClient which requires a Player.
-However, a player can also be substituted for null which will emit to all players.
+## Du serveur vers le client
 
-**Server Side**
+Le serveur peut transmettre des données au client avec `emitClient`, qui demande un élément de type Player.
+Cependant, il est possible de remplacer un Player avec `null`. L'évènement sera alors transmis a tous les clients connectés et non plus à un seul client en particulier.
+
+**Côté serveur**
 
 ```js
 alt.on('playerConnect', player => {
-    alt.emitClient(player, 'sayHello');
+    alt.emitClient(player, 'disBonjour');
 });
 ```
 
-**Client Side**
+**Côté client**
 
 ```js
-alt.onServer('sayHello', () => {
-    alt.log('Hello from server.');
+alt.onServer('disBonjour', () => {
+    alt.log('Bonjour depuis le serveur !');
 });
 ```
 
-## Client to Server
+## Du client vers le serveur
 
-The client may only emit data to the server-side with emitServer.
-The server-side onServer event will automatically receive a Player in their event handler.
+Le client peu transmettre des données vers le serveur avec emitServer.
+Du côté serveur, l'évènement onServer va reçevoir automatiquement un Player pour identifier le client émetteur.
 
-**Client Side**
+**Côté client**
 
 ```js
 alt.on('connectionComplete', () => {
-    alt.emitServer('sayHello');
+    alt.emitServer('disBonjour');
 });
 ```
 
-**Server Side**
+**Côté serveur**
 
 ```js
-alt.onClient('sayHello', player => {
-    alt.log(`${player.name} is saying hello`);
+alt.onClient('disBonjour', player => {
+    alt.log(`${player.name} nous dit bonjour !`);
 });
 ```
 
-## Server Resource to Server Resource
+## Ressource côté serveur vers ressource côté serveur
 
-The server may only communicate with itself with on and emit functions.
-The client may only communicate with itself with on and emit functions.
-They speak across resources as well.
+Le serveur peut communiquer avec lui même avec les functions `on` et `emit`.
+Les données sont disponibles dans toutes les ressources.
 
-**Server Side**
-
-```js
-alt.emit('hello', 'this is a message');
-
-alt.on('hello', msg => {
-    alt.log(msg);
-});
-```
-
-## Client Resource to Client Resource
-
-**Client Side**
+**Côté serveur**
 
 ```js
 alt.emit('hello', 'this is a message');
@@ -86,11 +74,26 @@ alt.on('hello', msg => {
 });
 ```
 
-## Client to WebView and Back
+## Ressource côté client vers ressource côté client
 
-**Note:** Resource in the HTTP address refers to the resource that you are currently writing code for.
+Le client peut communiquer avec lui même avec les functions `on` et `emit`.
+Les données sont disponibles dans toutes les ressources.
 
-**Client Side**
+**Côté client**
+
+```js
+alt.emit('hello', 'this is a message');
+
+alt.on('hello', msg => {
+    alt.log(msg);
+});
+```
+
+## Du client vers la WebView, et inversement
+
+**Note:** `Resource` dans l'adresse HTTP se réfère à la ressource pour laquelle vous êtes actuellement en train d'écrire du code.
+
+**Côté client**
 
 ```js
 const webview = new alt.WebView('http://resource/client/html/index.html');
@@ -105,7 +108,7 @@ alt.setTimeout(() => {
 }, 500);
 ```
 
-**Client Side HTML Page**
+**Page HTML côté client**
 
 ```html
 <html>
