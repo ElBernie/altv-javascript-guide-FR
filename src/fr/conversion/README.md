@@ -1,63 +1,63 @@
-# Converting from another Client?
+# Convertir depuis un autre mod multijoueur
 
-Well, you're not the only user who has done this.
+Bonne nouvelle, vous n'êtes pas le premier à la faire !
 
-alt:V has a lot to offer but there are some considerations when using this client.
+alt:V offre énormément de possibilités, mais il est important de prendre en compte certaines choses.
 
--   Server code can only be in JS, C#, or LUA.
--   Client code can only be in JS.
--   A module is being created to allow **any** language with WASM.
--   Natives are based on Rockstar's Actual Native Names
+-   Le code serveur peut seulement être écrit en JavaScript, C# ou LUA.
+-   Le code client peut seulement être écrit en JavaScript.
+-   Un module est en cours de développement pour supporter **n'importe quel** langage avec la technologie WASM.
+-   Le nom des Natives se base sur les noms donnés par Rockstar.
 
-Those are the only major things to consider about alt:V.
+Ce sont les seules choses majeures à prendre en compte pour alt:V.
 
-Otherwise here's some other important aspects.
+Mais il y a également des choses importantes !
 
-✔️ Yes alt:V supports clothing addons.
+✔️ Oui alt:V peut utiliser les vêtements customisés.
 
-✔️ Yes alt:V supports most modifications.
+✔️ Oui alt:V peut utiliser la plupart des mods.
 
-✔️ Yes alt:V supports MLOs.
+✔️ Oui alt:V peut utiliser les MLO.
 
-✔️ Yes alt:V supports custom maps.
+✔️ Oui alt:V peut utiliser les maps customisées.
 
-Here are some things alt:V does not have.
+Mais alt:V n'est pas en mesure de faire certaine choses.
 
-❌ No LUA on client-side
+❌ Pas de LUA côté client
 
-❌ No ESX
+❌ Pas d'ESX
 
-❌ No ELS (Dex++ is working on this)
+❌ Pas d'ELS (Dex++ travaille dessus)
 
-❌ No censorship if you poke the wrong person
+❌ Pas de censure
 
-❌ No we do not support .asi, .dll, or ENB files.
+❌ Pas de support pour l'utilisation des fichiers .asi, .dll ou ENB.N
 
-❌ No we do not support ScriptHookV.
+❌ Pas d'utilisation de ScriptHookV.
 
 <br />
 
 ---
 
-## FiveM to alt:V
+## De FiveM vers alt:V
 
-Here are some key differences between alt:V and FiveM.
+Voici les différences majeures entre alt:V et FiveM.
 
-### Server Side and Client Side
+### Côté serveur et côté client
 
-Yes, we actually have a server side and a client side. Which means that injections are not a very common issue for alt:V. Let alone client manipulation. However, nothing is safe from an expert programmer.
+Oui, le code côté client et côté serveur sont séparés. Cela signifie que les injections ne sont pas un problème régulier avec alt:V. Cependant il n'est absolument pas impossible pour un programmeur expert de modifier le code côté client
 
-[Here is a video covering serverside vs clientside.](https://www.youtube.com/watch?v=z-knlYI_QZM)
+[Vidéo présentant les différences entre le côté serveur et le côté client](https://www.youtube.com/watch?v=z-knlYI_QZM)
 
-### Local Player?
+### Joueur local?
 
-We don't use `local playerPed = PlayerPedId()` to get our local player.
+Nous n'utilisons pas `local playerPed = PlayerPedId()` pour obtenir les données du joueur local.
 
-We use `alt.Player.local.scriptID`.
+On utilise `alt.Player.local.scriptID`.
 
-### Local Player Vehicle?
+### Véhicule du joueur local?
 
-We don't use natives when we don't have to.
+Nous n'utilisons pas les natives quand nous n'en avons pas besoin.
 
 ```js
 alt.Player.local.vehicle;
@@ -65,9 +65,9 @@ alt.Player.local.vehicle;
 
 ### Threads?
 
-We use intervals and timeouts to generate threads.
+Nous utilisons les intervalles et les timeouts pour générer des threads.
 
-We also have access to `alt.everyTick` which is basically an interval at 0ms.
+Nous avons également accès à `alt.everyTick` qui est essentiellement un interval de 0ms.
 
 ```js
 const myInterval = alt.setInterval(doSomething, 5000);
@@ -86,37 +86,37 @@ alt.everyTick(() => {
 });
 ```
 
-### Events?
+### Evènements?
 
-Events come in all shapes and sizes. Checkout [the API:Events section.](../api/events)
+Les évènements sont utilisables pour a peu près tout. Consultez la section sur [les évènements](../api/events)
 
 ### Natives?
 
-Natives are imported and only accessible from client-side.
+Les natives sont importées et uniquement accessible depuis le côté client.
 
-You can visit [alt:V Native Database](https://natives.altv.mp) to better understand what is available.
+Vous pouvez visiter [la base de donnée de natives d'alt:V](https://natives.altv.mp) pour en savoir d'avantage.
 
-### Loading Screens?
+### Ecran de chargement?
 
-We do not currently support loading screens of any sort. We feel it is an unnecessary feature for multiplayer.
+Nous n'utilisons par actuellement les écrans de chargement. Nous pensons que cette fonctionnalité n'est pas nécessaire pour le multijoueur.
 
 ---
 
-## RAGE:MP to alt:V
+## De RAGE:MP vers alt:V
 
-Here are some key differences between alt:V and RAGE:MP.
+Voici les différences majeures entre alt:V et RAGE:MP.
 
 ### Local Player?
 
-We don't use `local playerPed = PlayerPedId()` to get our local player.
+Nous n'utilisons pas `local playerPed = PlayerPedId()` pour obtenir le joueur local.
 
-We use `alt.Player.local.scriptID`.
+On utilise `alt.Player.local.scriptID`.
 
 ### mp.events.add('render')
 
-We use intervals and timeouts to generate threads.
+Nous utilisons les intervalles et les timeouts pour générer des threads.
 
-We also have access to `alt.everyTick` which is basically an interval at 0ms.
+Nous avons également accès à `alt.everyTick` qui est essentiellement un interval de 0ms.
 
 ```js
 const myInterval = alt.setInterval(doSomething, 5000);
@@ -137,10 +137,10 @@ alt.everyTick(() => {
 
 ### mp.events.add & mp.events.call
 
-Events come in all shapes and sizes. Checkout [the API:Events section.](../api/events)
+Les évènements sont utilisables pour a peu près tout. Consultez la section sur [les évènements](../api/events)
 
-We get a lot finer control over our events for alt:V.
+Nous avons bien plus de controles sur nos évènements avec alt:V !
 
 ### Text Labels, Markers, etc.
 
-Check out the snippets section of this document.
+Consultez la section snippets du site.
