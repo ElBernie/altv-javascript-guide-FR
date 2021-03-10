@@ -1,57 +1,57 @@
-# Introduction to Events
+# Introduction aux évènements
 
-Events are the bread and butter to working with alt:V.
+Les évènements sont véritables le socle du développement avec alt:V.
 
-They help you retrieve a player instance whenever they perform a specific event. Examples would be connecting to the server, entering a vehicle, exiting a vehicle, and many more.
+Les évènements permettent de récupérer une instance d'un jour dès qu'il effectue un évènement spécifique. Par exemple, lorsque le joueur se connecte au serveur, lorsqu'il entre dans un véhicule, lorsqu'il en sort et plein d'autres !
 
-Let's take a look at the current available events
+Voici la lsite des évènements a votre disposition.
 
-## Server Side Events
+## Evènements côté serveur
 
-| Event Name               | Description                                                                      |
-| ------------------------ | -------------------------------------------------------------------------------- |
-| playerConnect            | When a player connects to the server.                                            |
-| playerDisconnect         | When a player disconnects from the server.                                       |
-| anyResourceStart         | When any resource starts.                                                        |
-| anyResourceStop          | When any resource stops.                                                         |
-| anyResourceError         | When any resource runs into an error.                                            |
-| resourceStart            | When a specific resource starts.                                                 |
-| resourceStop             | When a specific resource stops.                                                  |
-| syncedMetaChange         | When an entity has their syncedMeta changed.                                     |
-| streamSyncedMetaChange   | When an entity in a client's streaming range has their streamSyncedMeta changed. |
-| playerDamage             | When a player takes damage from someone else or something.                       |
-| playerDeath              | When a player dies.                                                              |
-| explosion                | When an explosion is created. ie. Running into a gas pump.                       |
-| weaponDamage             | When a weapon does damage.                                                       |
-| vehicleDestroy           | When a vehicle is destroyed.                                                     |
-| entityEnterColshape      | When an entity enters a ColShape.                                                |
-| entityLeaveColshape      | When an entity leaves a ColShape.                                                |
-| playerEnterVehicle       | When a player enters a vehicle. Fires when they sit down.                        |
-| playerLeaveVehicle       | When a player leaves a vehicle.                                                  |
-| playerChangedVehicleSeat | When a player is swapping seats in a vehicle.                                    |
-| removeEntity             | When an entity is removed from the game.                                         |
-| consoleCommand           | When you type a message into your server console and press enter.                |
+| Nom                      | Description                                                                                      |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| playerConnect            | Quand un joueur se connecte sur le serveur.                                                      |
+| playerDisconnect         | Quand un joueur quitte le serveur.                                                               |
+| anyResourceStart         | Quand une ressource démarre.                                                                     |
+| anyResourceStop          | Quand une ressource s'arrête.                                                                    |
+| anyResourceError         | Quand une ressource rencontre une erreur.                                                        |
+| resourceStart            | Quand une ressource spécifique démarre.                                                          |
+| resourceStop             | Quand une ressource spécifique s'arrête.                                                         |
+| syncedMetaChange         | Quand une entité voit ses syncedMeta changées.                                                   |
+| streamSyncedMetaChange   | Quand une entité dans la zone de streaming d'un client voit ses syncedMeta changées.             |
+| playerDamage             | Quand un joueur prend un dégat d'un autre joueur ou d'un autre objet.                            |
+| playerDeath              | QUand un joueur meurt.                                                                           |
+| explosion                | Quand une explosion a lieu, par exemple lorsqu'on percute une pompe a essence.                   |
+| weaponDamage             | Quand une arme fait un dégat.                                                                    |
+| vehicleDestroy           | Quand un véhicule est détruit.                                                                   |
+| entityEnterColshape      | Quand une entité entre dans une ColShape.                                                        |
+| entityLeaveColshape      | Quand une entité quitte une ColShape.                                                            |
+| playerEnterVehicle       | Quand un joueur rentre dans un véhicule. L'évènement se déclenche uniquement quand il s'asseoit. |
+| playerLeaveVehicle       | Quand un joueur quitte un véhicule.                                                              |
+| playerChangedVehicleSeat | Quand un joueur change de siège dans un véhicule.                                                |
+| removeEntity             | Quand une entitée est supprimée du jeu                                                           |
+| consoleCommand           | Quand vous tappez une commande dans la console et que vous appuyez sur Entrée                    |
 
-[Check the Server Events API for Info](https://altmp.github.io/altv-typings/modules/_alt_server_.html#on)
+[Liste des évènements côté serveur](https://altmp.github.io/altv-typings/modules/_alt_server_.html#on)
 
-## Client Side Events
+## Evènement côté client
 
-| Event Name             | Description                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| connectionComplete     | When a player is fully connected to the server on client-side.                   |
-| disconnect             | When a player disconnects from the server this triggers client-side.             |
-| anyResourceStart       | When any resource starts.                                                        |
-| anyResourceStop        | When any resource stops.                                                         |
-| anyResourceError       | When any resource runs into an error.                                            |
-| resourceStart          | When a specific resource starts.                                                 |
-| resourceStop           | When a specific resource stops.                                                  |
-| syncedMetaChange       | When an entity has their syncedMeta changed.                                     |
-| streamSyncedMetaChange | When an entity in a client's streaming range has their streamSyncedMeta changed. |
-| keydown                | When a player presses a key down.                                                |
-| keyup                  | When a key is released.                                                          |
-| gameEntityCreate       | When an entity enters the streaming range of a client.                           |
-| gameEntityDestroy      | When an entity leaves the streaming range of a client.                           |
-| removeEntity           | When an entity is removed from the game.                                         |
-| consoleCommand         | When you type a message into your server console and press enter.                |
+| Nom                    | Description                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| connectionComplete     | Quand un joueur est totalement connecté au serveur du côté client.                   |
+| disconnect             | Quand un joueur quitte le serveur, évènement déclenché côté client.                  |
+| anyResourceStart       | Quand une ressource démarre.                                                         |
+| anyResourceStop        | Quand une ressource s'arrête.                                                        |
+| anyResourceError       | Quand une ressource rencontre une erreur.                                            |
+| resourceStart          | Quand une ressource spécifique démarre.                                              |
+| resourceStop           | Quand une ressource spécifique s'arrête.                                             |
+| syncedMetaChange       | Quand une entité voit ses syncedMeta changées.                                       |
+| streamSyncedMetaChange | Quand une entité dans la zone de streaming d'un client voit ses syncedMeta changées. |
+| keydown                | Quand un joueur appuie sur une touche.                                               |
+| keyup                  | Quand un joueur relache une touche.                                                  |
+| gameEntityCreate       | Quand une entité entre dans la zone de streaming du client.                          |
+| gameEntityDestroy      | Quand une entité quitte la zone de streaming du client.                              |
+| removeEntity           | Quand une entité est supprimée du jeu.                                               |
+| consoleCommand         | Quand vous tappez une commande dans la console et que vous appuyez sur Entrée.       |
 
-[Check the Client Events API for Info](https://altmp.github.io/altv-typings/modules/_alt_client_.html#on)
+[Liste des évènements côté client](https://altmp.github.io/altv-typings/modules/_alt_client_.html#on)
