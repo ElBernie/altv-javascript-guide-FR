@@ -1,21 +1,22 @@
-# Event Usage Guide
+# Guide de l'utilisation des évènements
 
-Now that we've given a brief overview of events. Let's talk about how to read the API.
+Maintenant que nous avons fait un tour rapide des évènements disponibles, il est important de comprendre la documentation.
 
-_If these links are ever out of date. Notify Stuyk._
+_Si ces liens ne fonctionnent plus,avertissez Stuyk sur Discord._
 
--   [Server API](https://altmp.github.io/altv-typings/modules/_alt_server_.html#on)
--   [Client API](https://altmp.github.io/altv-typings/modules/_alt_client_.html#on)
+-   [API serveur](https://altmp.github.io/altv-typings/modules/_alt_server_.html#on)
+-   [API Client](https://altmp.github.io/altv-typings/modules/_alt_client_.html#on)
 
+Les sections ci-dessous sont des exemples d'utilisation des évènements
 Below is some common use cases for events. Just some general code regarding how to use them.
 
-[Refer to Server Event Examples for Syntax and Parameters](./server_events)
+[Référence d'utilisation des Evenements serveur](./server_events)
 
-## playerConnect  Server Side Sample Events
+## playerConnect exemple côté serveur
 
-This event is the entry point for any player who is joining your server. You should be using this event once in your entire resource. It listens for player connections. You can even kick a player before they fully connect.
+Cet évènement est le point d'entrée pour tout joueur qui rejoint votre serveur. Cette évènement devrait être utilisé une seule fois dans toute votre ressource. Vous pouvez même kicker un joueur avant qu'il soit totalement connecté !
 
-**Server Side**
+**Serveur**
 
 ```js
 // An event to handle when a player connects.
@@ -27,13 +28,13 @@ function handlePlayerConnect(player) {
 }
 ```
 
-It's important to understand that **NOTHING HAPPENS** after a player connects.
+Vous devez prendre en compte le fait que \*_RIEN NE SE PASSE_ après la connexion d'un joueur.
 
-No player can move. No model is set for the player.
+Le joueur ne peut pas bouger et le modèle du joueur n'est pas défini.
 
-Here is how you set a player model and spawn the player.
+Voici comment définir le modèle du joueur et le faire spawn.
 
-**Server Side**
+**Serveur**
 
 ```js
 /// <reference types="@altv/types-server" />
@@ -53,15 +54,15 @@ function handlePlayerConnect(player) {
 }
 ```
 
-## connectionComplete Client Side Sample
+## connectionComplete exemple côté client
 
-The alternative to the `playerConnect` event is the `connectionComplete` event from client-side. This is when a player is fully connected to the server.
+L'alternative à l'évèneùe,t `playerConnect` est l'évènement client `connectionComplete`. Cet évènement est déclenché quand le joueur est totalement connecté au serveur.
 
-This event is client-side and we already know who the player is. This is only happening on their computer and is instance based.
+Cet évènement s'execute côté client, et nous savons déjà qui est le joueur qui se connecte.
 
-Which means this function is ran for every player but only for the player that connected.
+Cela signifie que cet évènement ne s'exécute que sur le client du joueur qui se connecte, et pas pour l'ensemble des joueurs connectés.
 
-**Client Side**
+**Client**
 
 ```js
 alt.on('connectionComplete', handleConnectionComplete);
@@ -74,7 +75,7 @@ function handleConnectionComplete() {
 }
 ```
 
-**Server Side**
+**Server**
 
 ```js
 alt.onClient('helloFromClient', handleHelloFromClient);
@@ -85,13 +86,13 @@ function handleHelloFromClient(player, msg) {
 }
 ```
 
-## playerDeath Server Side & Client Side Sample
+## playerDeath exemple côté serveur & côté client
 
-Player Death is a pretty common event. If a player dies you will want to use `player.spawn` to restore their functionality.
+La mort d'un joueur est évènement assez commun. Si un joueur meurt, il faudra utiliser la fonction `player.spawn` pour le ramener à la vie.
 
-You will have to ragdoll them manually after they die if you wish for them to stay there for a long time. Keep in mind you must run `player.spawn` before marking them to be rag dolled.
+Vous aurez besoin de le mettre en position de ragdoll manuellement après la mort du joueur, si vous souhaitez qu'il reste sur place pour un long moment. Gardez en tête qu'il faut absolument le faire respawn (`player.spawn`) avant de le mettre en position de ragdoll.
 
-### Server Side
+### Côté serveur
 
 ```js
 alt.on('playerDeath', handlePlayerDeath);
@@ -117,11 +118,11 @@ function handlePlayerDeath(victim, killer, weaponHash) {
 }
 ```
 
-### Common Use Case
+### Cas classique d'utilisation
 
-Let's say we want to ragdoll a player when they die and keep them ragdoll until they respawn there is a simple way we can do that.
+Imaginons que nous souhaitons mettre le joueur en position de ragdoll après sa mort jusqu'a son respawn. L'exemple suivant permet de faire ça très simplement.
 
-#### Server Side
+#### Serveur
 
 ```js
 alt.on('playerDeath', handlePlayerDeath);
@@ -160,7 +161,7 @@ function handlePlayerDeath(victim, killer, weaponHash) {
 }
 ```
 
-#### Client Side
+#### Client
 
 ```js
 let interval;
@@ -192,11 +193,11 @@ function handleDeathTicks() {
 }
 ```
 
-## playerLeftVehicle & playerEnteredVehicle Server Side Sample
+## playerLeftVehicle & playerEnteredVehicle côté serveur
 
-These events are triggered when a player enters or leaves a vehicle.
+Ces évènements sont déclenchés quand un joueur entre ou quitte un véhicule.
 
-Here's an example of deleting the vehicle the player entered after they exit it.
+Voici un exemple de code pour supprimer le véhicule du joueur quand il le quitte.
 
 ```js
 alt.on('playerEnteredVehicle', handlePlayerEnteredVehicle);
