@@ -1,6 +1,6 @@
-# JavaScript Primer
+# Bases du JavaScript
 
-This page is to explain some basic JavaScript principles. This is mainly for the people who refuse to look into a place like Code Academy to learn how to code. However, here are some courses.
+Cette page va vous permettre de comprendre les bases du JavaScript. Elle est destinée aux personnes qui ne souhaitent pas apprendre le JavaScript par le biais de site comme CodeAcademy. Vous pouvez trouver d'autres ressources pour apprendre le JavaScript ci-dessous.
 
 -   [https://learnxinyminutes.com/docs/javascript/](https://learnxinyminutes.com/docs/javascript/)
 -   [https://www.learn-js.org/](https://www.learn-js.org/)
@@ -8,147 +8,148 @@ This page is to explain some basic JavaScript principles. This is mainly for the
 
 ## Variables
 
-There are two types of variables you should be using in JavaScript these days.
+Il existe de type de variables qui peuvent être utilisées avec le JavaScript
 
 ```js
-const myVariable = 'example';
-let myVariableName = 'example';
+const maVariable = 'example';
+let monAutreVariable = 'example';
 ```
 
-**const** means the variable is constant. This means the variable type cannot change and the properties of the content can be re-assigned. Also must have a value.
+**const** signifie que cette variable est une constante. Cela veut dire que le type de cette variable, ainsi que ses propriétés ne peuvent changer. Elle doit également avoir une valeur lors de son initialisation.
 
-**let** is a type of variable that can have its value re-assigned. Meaning it can be reused over and over again. Value is optional.
+**let** signifie que cette variable peut être réassignée. Une variable de ce type peut être réutilisée. Définir une valeur à l'initialisation de ce type de variable est optionnel.
 
 ```js
-let myVariable;
-myVariable = 'test';
-myVariable = 25;
-myVariable = {
-    myProperty: 'Cool Stuff'
+let maVariable;
+maVariable = 'test';
+maVariable = 25;
+maVariable = {
+    maPropriété: 'Cool Stuff'
 };
 ```
 
-## Basic Math
+## Mathématiques de base
 
-Mathematics is mostly similar to other programming languages.
+Les mathématiques en JavaScript sont quasiment similaires aux autres langages.
 
 ```js
-let result;
+let resultat;
 
 // Addition
-result = 5 + 5;
-result += 1;
-console.log(result);
+resultat = 5 + 5;
+resultat += 1;
+console.log(resulta);
 
-// Subtraction
-result = 10 - 5;
-result -= 1;
-console.log(result);
+// Soustraction
+resultat = 10 - 5;
+resultat -= 1;
+console.log(resultat);
 
 // Multiplication
-result = 10 * 5;
-result *= 2;
-console.log(result);
+resultat = 10 * 5;
+resultat *= 2;
+console.log(resultat);
 
 // Division
-result = 10 / 5;
-console.log(result);
+resultat = 10 / 5;
+console.log(resultat);
 ```
 
-## Basic Functions
+## Fonctions basiques
 
-Functions are special blocks of code that can be called from other blocks of code. They can also be exported and imported into other files and called. We’ll talk about imports just below this section.
+Les fonctions sont des blocs de code qui peuvent être appelés depuis d'autres blocs de code. Les fonctions peuvent également être exportées et importées dans d'autres fichiers. On parlera de l'importation de fonctions un peu plus bas dans cette section.
 
-You can also write functions in a ton of different ways. I prefer traditional rather than the fat arrow functions.
+Vous pouvez écrire les fonctions de diverses façons. Je préfère la façon traditionnelle plutôt que les `arrow functions`.
 
-**Traditional Function Example**
+**Exemple de fonction traditionnelle**
 
 ```js
-function myFancyFunction(myArgument, myOtherArgument) {
-    console.log(myArgument);
-    console.log(myOtherArgument);
+function maSuperFonction(monArgument, monAutreArgument) {
+    console.log(monArgument);
+    console.log(monAutreArgument);
 }
 
-myFancyFunction('hello', 'world');
+maSuperFonction('hello', 'world');
 
-function add(n1, n2) {
+function addition(n1, n2) {
     return n1 + n2;
 }
 
-const result = add(5, 5);
-console.log(result);
-// Prints 5 as the result.
+const resultat = addition(5, 5);
+console.log(resultat);
+//affiche le résultat de la fonction addition, en l'occurence 10.
 ```
 
-**Fat Arrow Functions**
+**Arrow Functions**
 
 ```js
-const myFancyFunction = (myArgument, myOtherArgument) => {
-    console.log(myArgument);
-    console.log(myOtherArgument);
+const maSuperFonction = (monArgument, monAutreArgument) => {
+    console.log(monArgument);
+    console.log(monAutreArgument);
 };
 
-myFancyFunction('hello', 'world');
+maSuperFonction('hello', 'world');
 
-const add = (n1, n2) => {
+const addition = (n1, n2) => {
     return n1 + n2;
 };
 
-const result = add(5, 5);
-console.log(result);
-// Prints 5 as the result.
+const resultat = addition(5, 5);
+console.log(resultat);
+//affiche le résultat de la fonction addition, en l'occurence 10.
 ```
 
-## Exporting Functions
+## Exporter des fonctions
 
-Exporting is a big part of the process when working with alt:V. However, the exports are not common js. We use ES6 syntax for a majority of imports and exports. This is slightly different if you’re used to the whole module exports part of common js.
+L'exportation est très important quand on travaille avec le framework alt:V. Cependant, l'exportation n'est pas disponible avec le code JavaScript de base. On utilise souvent la syntaxe ES6 pour importer et exporter. Cette syntaxe est légèrement différente que la syntaxe du JavaScript de base pour exporter des modules.
 
-Assume these files are in the same directory.
+Imaginons que ces fichiers soit dans le même dossier.
 
-**File 1 - file1.js**
+**Fichier 1 - fichier1.js**
 
 ```js
-export function myFunction(arg1, arg2) {
+export function maFonction(arg1, arg2) {
     console.log(arg1, arg2);
 }
 ```
 
-**File 2 - file2.js**
+**Fichier 2 - fichier2.js**
 
 ```js
-import { myFunction } from './file1.js';
+import { maFonction } from './fichier1.js';
 
-myFunction('hello', 'world');
+maFonction('hello', 'world');
 ```
 
-**File 2 (Alternative) - file2.js**
+**Fichier 2 (alternative) - fichier2.js**
 
 ```js
-import * as myFuncs = from './file1.js'
+import * as mesFonctions = from './fichier1.js'
 
-myFuncs.myFunction('hello', 'world');
+mesFonctions.maFonction('hello', 'world');
 ```
 
-Pretty simple to handle and we’ll be using these exported and imported functions all over the place when it comes down to creating a solid file structure.
+C'est au final assez simple ! On utilise très régulièrement l'importation et l'exportation quand il s'agit de créer une infrastructure de fichiers solide pour notre serveur.
 
-## For Loops
+## Boucles For
 
-Loops are used for so many different things in Javascript and should be used in every part of your toolkit to help you write less code. A for loop allows us to loop through a block of code multiple times. Which allows us to do different things with the results inside of an array.
+Les boucles sont utilisées pour plein de choses différentes en JavaScript et peuvent vous servir a réduire la taille de votre code. Une boucle `for` permet d'executer un bloc de code plusieurs fois de suite, et cela nous permet de faire différentes choses avec les tableaux de donnée (`array`)
 
-Keep in mind that arrays start at zero (0). This isn’t Lua. Meaning the first element in the array is always a zero.
+Gardez à l'esprit que les arrays commencent toujours à 0.
 
 ```js
 const data = ['test0', 'test1', 'test2'];
 
-function saySomething(msg) {
+function envoyerMessage(msg) {
     console.log(msg);
 }
 
 // is a number in this for loop
 // i++ increments the number by 1
 for (let i = 0; i < data.length; i++) {
-    saySomething(data[i]);
+    envoyerMessage(data[i]);
 }
 ```
 
-The above code will print for the above array 3 times. It will first print ‘test0’, ‘test1’, and then ‘test2’. This is done by passing the data inside of the array based on the element number which is i.
+Le code ci-dessus va afficher 3 fois l'array `data`. Il va afficher en premier ‘test0’, puis ‘test1’ et enfin ‘test2’.
+La boucle s'effectue sur l'array `data`, en lisant les données suivant l'ordre défini par la variable `i`.
