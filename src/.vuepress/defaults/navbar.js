@@ -8,7 +8,8 @@ const defaultNavbar = [
             { text: 'Deutsch', link: '/de/introduction/' },
             { text: 'Română', link: '/ro/introduction/' },
             { text: 'Slovenský', link: '/sk/introduction/' },
-            { text: 'Türk', link: '/tr/introduction/' }
+            { text: 'Türk', link: '/tr/introduction/' },
+            { text: 'Français', link: '/fr/introduction/' }
         ]
     },
     {

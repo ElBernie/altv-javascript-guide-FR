@@ -27,3 +27,5 @@ Keep in mind that these are community maintained and may not be up to date.
 [Slovenský](/sk/introduction)
 
 [Türk](/tr/introduction)
+
+[Français](/fr/introduction)
