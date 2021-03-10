@@ -16,7 +16,7 @@ Si il n'existe, vous pouvez le créer avec l'option suivante.
 debug: 'true'
 ```
 
-## Reconnecting
+## Se reconnecter
 
 Suite à un redémarrage de serveur, vous serez déconnecté. Vous pouvez vous reconnecter uniquement si le serveur a le paramètre `debug` configuré sur `true`, et également sur votre client.
 
